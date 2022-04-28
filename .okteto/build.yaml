@@ -6,6 +6,3 @@ build:
   galera:
     context: galera
     dockerfile: galera/Dockerfile
-  app:
-    context: app
-    dockerfile: app/Dockerfile

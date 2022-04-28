@@ -22,19 +22,10 @@ build:
     context: lb
     dockerfile: lb/Dockerfile
 
-  # You can use the following env vars to refer to this image in your deploy commands:
-  #  - OKTETO_BUILD_APP_REGISTRY: image registry
-  #  - OKTETO_BUILD_APP_REPOSITORY: image repo
-  #  - OKTETO_BUILD_APP_IMAGE: image name
-  #  - OKTETO_BUILD_APP_TAG: image tag
-  app:
-    context: app
-    dockerfile: app/Dockerfile
-
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
-  - helm upgrade --install ${OKTETO_NAME} chart --set lb.image=${OKTETO_BUILD_LB_IMAGE} --set galera.image=${OKTETO_BUILD_GALERA_IMAGE} --set app.image=${OKTETO_BUILD_APP_IMAGE}
+  - helm upgrade --install ${OKTETO_NAME} chart --set lb.image=${OKTETO_BUILD_LB_IMAGE} --set galera.image=${OKTETO_BUILD_GALERA_IMAGE}
 
 # The dependencies section defines other git repositories to be deployed as part of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#dependencies
@@ -72,5 +63,3 @@ dev:
       - 9000:9000
     volumes:
       - /root/.composer/cache
-  app:
-    image: php:7.4-apache
