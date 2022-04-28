@@ -21,4 +21,3 @@ RUN docker-php-ext-install \
     simplexml \
     gd \
     soap \
-    apcu
