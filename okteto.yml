@@ -29,7 +29,7 @@ build:
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
-  - helm upgrade --install ${OKTETO_NAME} chart --set lb.image=${OKTETO_BUILD_LB_IMAGE} --set galera.image=${OKTETO_BUILD_GALERA_IMAGE}
+  - helm upgrade --install ${OKTETO_NAME} chart --set lb.image=${OKTETO_BUILD_LB_IMAGE} --set galera.image=${OKTETO_BUILD_GALERA_IMAGE} --set helloworld.image=${OKTETO_BUILD_HELLOWORLD_IMAGE}
 
 # The dependencies section defines other git repositories to be deployed as part of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#dependencies
