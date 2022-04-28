@@ -6,6 +6,6 @@ build:
   galera:
     context: galera
     dockerfile: galera/Dockerfile
-  hello-world:
-    context: hello-world
-    dockerfile: hello-world/Dockerfile
+  app:
+    context: app
+    dockerfile: app/Dockerfile
