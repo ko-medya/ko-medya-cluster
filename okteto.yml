@@ -1,0 +1,66 @@
+name: ko-medya-cluster
+
+# The build section defines how to build the images of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#build
+build:
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_GALERA_REGISTRY: image registry
+  #  - OKTETO_BUILD_GALERA_REPOSITORY: image repo
+  #  - OKTETO_BUILD_GALERA_IMAGE: image name
+  #  - OKTETO_BUILD_GALERA_TAG: image tag
+  galera:
+    context: galera
+    dockerfile: galera/Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_LB_REGISTRY: image registry
+  #  - OKTETO_BUILD_LB_REPOSITORY: image repo
+  #  - OKTETO_BUILD_LB_IMAGE: image name
+  #  - OKTETO_BUILD_LB_TAG: image tag
+  lb:
+    context: lb
+    dockerfile: lb/Dockerfile
+
+# The deploy section defines how to deploy your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#deploy
+deploy:
+  - helm upgrade --install ${OKTETO_NAME} chart --set lb.image=${OKTETO_BUILD_LB_IMAGE} --set galera.image=${OKTETO_BUILD_GALERA_IMAGE}
+
+# The dependencies section defines other git repositories to be deployed as part of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#dependencies
+# dependencies:
+#   - https://github.com/okteto/sample
+
+
+# The dev section defines how to activate a development container
+# More info: https://www.okteto.com/docs/reference/manifest/#dev
+dev:
+  galera:
+    selector:
+      app.kubernetes.io/component: galera
+    command: bash
+    workdir: /usr/src/app
+    sync:
+      - galera:/usr/src/app
+    forward:
+      - 3306:3306
+    reverse:
+      - 9000:9000
+    volumes:
+      - /root/.composer/cache
+  lb:
+    selector:
+      app.kubernetes.io/component: lb
+    command: bash
+    workdir: /usr/src/app
+    sync:
+      - lb:/usr/src/app
+    forward:
+      - 8443:443
+      - 8080:80
+    reverse:
+      - 9000:9000
+    volumes:
+      - /root/.composer/cache
+

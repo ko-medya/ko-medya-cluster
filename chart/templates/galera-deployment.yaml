@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: galera
+  labels:
+    {{- include "galera.labels" . | nindent 4 }}
+    app.kubernetes.io/component: galera
+spec:
+  replicas: {{ .Values.galera.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: galera
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: galera
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: galera
+        image: {{ .Values.galera.image }}
+        env:
+          - name: MARIADB_ROOT_PASSWORD
+            value: {{ .Values.galera.root_password }}
+        ports:
+        - name: mysql
+          containerPort: 3306
+          protocol: TCP

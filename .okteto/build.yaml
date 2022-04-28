@@ -1,0 +1,8 @@
+name: ko-medya-cluster
+build:
+  lb:
+    context: lb
+    dockerfile: lb/Dockerfile
+  galera:
+    context: galera
+    dockerfile: galera/Dockerfile

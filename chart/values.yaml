@@ -1,0 +1,8 @@
+lb:
+  replicaCount: 1
+  image: nginx:1.21-alpine
+
+galera:
+  replicaCount: 1
+  image: mariadb:10.5
+  root_password: "dudh1234H!"

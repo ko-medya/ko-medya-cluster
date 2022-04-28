@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lb
+  labels:
+    {{- include "lb.labels" . | nindent 4 }}
+    app.kubernetes.io/component: lb
+spec:
+  replicas: {{ .Values.lb.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lb
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lb
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: lb
+        image: {{ .Values.lb.image }}
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        - name: https
+          containerPort: 443
+          protocol: TCP
