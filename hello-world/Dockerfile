@@ -20,4 +20,4 @@ RUN docker-php-ext-install \
     dom \
     simplexml \
     gd \
-    soap \
+    soap
