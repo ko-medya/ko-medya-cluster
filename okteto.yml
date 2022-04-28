@@ -22,6 +22,11 @@ build:
     context: lb
     dockerfile: lb/Dockerfile
 
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_HELLO_WORLD_REGISTRY: image registry
+  #  - OKTETO_BUILD_HELLO_WORLD_REPOSITORY: image repo
+  #  - OKTETO_BUILD_HELLO_WORLD_IMAGE: image name
+  #  - OKTETO_BUILD_HELLO_WORLD_TAG: image tag
   hello-world:
     context: hello-world
     dockerfile: hello-world/Dockerfile
