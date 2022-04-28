@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: galera
   labels:
-  {{- include "galera.labels" . | nindent 4 }}
+    {{- include "galera.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
   ports:
