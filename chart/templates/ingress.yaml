@@ -25,7 +25,6 @@ spec:
             port:
               name: https
       - path: /
-        pathType: Prefix
         backend:
           service:
             name: galera
