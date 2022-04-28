@@ -7,6 +7,6 @@ galera:
   image: mariadb:10.5
   root_password: "dudh1234H!"
 
-hello-world:
+helloworld:
   replicaCount: 1
   image: php:7.4-apache

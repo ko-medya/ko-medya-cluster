@@ -6,7 +6,7 @@ metadata:
     {{- include "hello-world.labels" . | nindent 4 }}
     app.kubernetes.io/component: hello-world
 spec:
-  replicas: {{ .Values.hello-world.replicaCount }}
+  replicas: {{ .Values.helloworld.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: hello-world
@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 0
       containers:
       - name: hello-world
-        image: {{ .Values.hello-world.image }}
+        image: {{ .Values.helloworld.image }}
         ports:
         - name: http
           containerPort: 80
