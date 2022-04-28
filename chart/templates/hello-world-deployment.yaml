@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  labels:
+    {{- include "hello-world.labels" . | nindent 4 }}
+    app.kubernetes.io/component: hello-world
+spec:
+  replicas: {{ .Values.hello-world.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hello-world
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hello-world
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: hello-world
+        image: {{ .Values.hello-world.image }}
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        - name: https
+          containerPort: 443
+          protocol: TCP

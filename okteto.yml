@@ -22,6 +22,10 @@ build:
     context: lb
     dockerfile: lb/Dockerfile
 
+  hello-world:
+    context: hello-world
+    dockerfile: hello-world/Dockerfile
+
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
@@ -63,4 +67,6 @@ dev:
       - 9000:9000
     volumes:
       - /root/.composer/cache
-
+  hello-world:
+    image: php:alpine
+      -
