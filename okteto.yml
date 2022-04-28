@@ -26,6 +26,16 @@ build:
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
   - helm upgrade --install ${OKTETO_NAME} chart --set lb.image=${OKTETO_BUILD_LB_IMAGE} --set galera.image=${OKTETO_BUILD_GALERA_IMAGE}
+  endpoints:
+    - path: /
+      service: lb
+      port: 80
+    - path: /
+      service: lb
+      port: 443
+    - path: /
+      service: galera
+      port: 3306
 
 # The dependencies section defines other git repositories to be deployed as part of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#dependencies
