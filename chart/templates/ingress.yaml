@@ -16,17 +16,18 @@ spec:
           service:
             name: lb
             port:
-              name: http
+              number: 80
       - path: /
         pathType: Prefix
         backend:
           service:
             name: lb
             port:
-              name: https
+              number: 443
       - path: /
+        pathType: Prefix
         backend:
           service:
             name: galera
             port:
-              name: mysql
+              number: 3306
