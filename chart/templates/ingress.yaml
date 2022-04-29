@@ -8,8 +8,7 @@ metadata:
     dev.okteto.com/generate-host: "true"
 spec:
   rules:
-  - host: load-balancer-ko-medya.cloud.okteto.net
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
