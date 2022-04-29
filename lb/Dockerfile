@@ -1,3 +1,7 @@
 FROM nginx:1.21-alpine
-EXPOSE 80
+
+RUN mkdir -p var/www
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
