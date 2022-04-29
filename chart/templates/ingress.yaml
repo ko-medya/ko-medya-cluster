@@ -8,7 +8,7 @@ metadata:
     dev.okteto.com/generate-host: "true"
 spec:
   rules:
-  - host: lb-ko-medya.cloud.okteto.com
+  - host: lb-ko-medya.cloud.okteto.net
     http:
       paths:
       - path: /
@@ -25,7 +25,7 @@ spec:
             name: lb
             port:
               number: 443
-  - host: galera-ko-medya.cloud.okteto.com
+  - host: galera-ko-medya.cloud.okteto.net
     http:
       paths:
       - path: /
